@@ -1,11 +1,24 @@
 'use strict';
-var tx = 'http://{Your TX node IP}:8545';
-var passpharse = '{Your account pass phrase}';
+var tx = 'http://{TX Node IP}:8545';
+var passpharse = '{Password}';
 var fs = require('fs');
 var Web3 = require('web3');
 var web3 = new Web3();
 var address5 = '0x2ed795cdff952c6f00a34d6c3ca81344cfcf850bb838fa5a4fb28c72af9b7ef0';//deployed contract address
 var text = fs.readFileSync('./contracts/ChickenFarmContract5.json','utf8');//truffle compile result
+
+
+web3.setProvider(new web3.providers.HttpProvider(tx));
+
+//unlock accounts that we'll be using
+web3.personal.unlockAccount(web3.eth.accounts[0],passpharse);
+//load contract
+var contractInterface = JSON.parse(text);
+//deploy the contract with constructor parameters, we need to supply gas so that the contract can be deployed
+var cf3 = web3.eth.contract(contractInterface.abi).new('test123','test456',{from:web3.eth.accounts[0],data:contractInterface.unlinked_binary,gas:3000000});
+//the contract will need to be mined, we get transaction hash here to check if it is mined
+console.log('cf3.transactionHash:' + cf3.transactionHash);
+
 
 function waitForTransactionReceipt(hash) {
     console.log('waiting for contract to be mined');
@@ -25,16 +38,6 @@ function waitForTransactionReceipt(hash) {
     }
 }
 
-web3.setProvider(new web3.providers.HttpProvider(tx));
-
-//unlock accounts that we'll be using
-web3.personal.unlockAccount(web3.eth.accounts[0],passpharse);
-//load contract
-var contractInterface = JSON.parse(text);
-//deploy the contract with constructor parameters, we need to supply gas so that the contract can be deployed
-var cf3 = web3.eth.contract(contractInterface.abi).new('test123','test456',{from:web3.eth.accounts[0],data:contractInterface.unlinked_binary,gas:3000000});
-//the contract will need to be mined, we get transaction hash here to check if it is mined
-console.log('cf3.transactionHash:' + cf3.transactionHash);
 //wait till transaciton mined
 waitForTransactionReceipt(cf3.transactionHash);
 
