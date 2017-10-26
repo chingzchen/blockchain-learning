@@ -49,20 +49,16 @@ contract myClientContract4 is OracleApp4 {
         queryOracle(_state);
     }
     function updateContract2(string _state) myOracleAPI {
-        key = "updateContract2";    
         state = _state;
     }
     function updateContract3(string _state) myOracleAPI {
-        key = "updateContract3";    
         oracle.query(_state);
         state = _state;
     }
     function updateContract4(string _state) myOracleAPI {
-        key = "updateContract4";    
         oracle.query(_state);
     }      
     function updateContract5() myOracleAPI returns (uint) {
-        key = "updateContract5";    
         return  oracle.getRandomNumber();
     }
 }

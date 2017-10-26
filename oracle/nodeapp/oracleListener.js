@@ -5,8 +5,8 @@ OracleContract4: 0x08c152C90F2775915B1EBC88C218A9B86307A775
 OracleApp4: 0x5074bf9892a1ce5be4126e53b8d7addc4b04f918
 */
 
-var tx = 'http://{txnode ip}:8545';
-var passpharse = '{password}';
+var tx = 'http://13.92.177.20:8545';
+var passpharse = 'Pwd=222222222';
 var fs = require('fs');
 var Web3 = require('web3');
 var web3 = new Web3();
@@ -53,9 +53,8 @@ queryEvent.watch(function(err,result){
     if(!err){
         console.log('QueryEvent fired:' + JSON.stringify(result));
         //exact query parameters
-        var id = _.at(result, 'args.id');
-        var query = _.at(result,'args.query');
-
+        //var id = _.at(result, 'args.id');
+        //var query = _.at(result,'args.query');
     }else{
         console.log('error=' + JSON.stringify(err));
     }

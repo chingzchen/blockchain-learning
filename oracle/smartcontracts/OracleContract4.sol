@@ -21,16 +21,12 @@ contract OracleContract4 {
     }
 
     function getRandomNumber() returns (uint) {
-        state = "getRandomNumber";
         return 12;
     }
 
     function query(string _query) returns (bytes32) {
-        state = "query1";
         bytes32 id = sha3(block.number, now, _query, msg.sender);
-        state = "query2";
         QueryEvent(id, _query);
-        state = "query3";
         return id;
     }
 }
