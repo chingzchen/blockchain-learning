@@ -9,11 +9,11 @@ contract OracleApp4 {
     OracleContract4 public oracle;
 
     function OracleApp4() {
-        resolver = OracleResolver4(0x444078Aa15FE48B152245744cBD16023B2444C0e);//change the address to your OracleResolver.sol address
-        resolver.setOracleAddress(0x08c152C90F2775915B1EBC88C218A9B86307A775);//change the address to your Oracle.sol address
+        resolver = OracleResolver4(0x444078Aa15FE48B152245744cBD16023B2444C0e);//change the address to your OracleResolver.sol checksum address
+        resolver.setOracleAddress(0x08c152C90F2775915B1EBC88C218A9B86307A775);//change the address to your Oracle.sol checksum address
         oracle = OracleContract4(resolver.getOracleAddress());
     }
-    
+
     modifier myOracleAPI {
         _;
     }

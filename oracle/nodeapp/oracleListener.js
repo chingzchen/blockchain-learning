@@ -5,8 +5,8 @@ OracleContract4: 0x08c152C90F2775915B1EBC88C218A9B86307A775
 OracleApp4: 0x5074bf9892a1ce5be4126e53b8d7addc4b04f918
 */
 
-var tx = 'http://13.92.177.20:8545';
-var passpharse = 'Pwd=222222222';
+var tx = 'http://{txnode ip}:8545';
+var passpharse = '{password}';
 var fs = require('fs');
 var Web3 = require('web3');
 var web3 = new Web3();
@@ -18,7 +18,6 @@ web3.setProvider(new web3.providers.HttpProvider(tx));
 //unlock accounts that we'll be using
 web3.personal.unlockAccount(web3.eth.accounts[0],passpharse,30000);   //sender
 web3.personal.unlockAccount(web3.eth.accounts[1],passpharse,30000);   //oracle
-
 
 function waitForTransactionReceipt(hash) {
     console.log('waiting for contract to be mined');
@@ -65,12 +64,3 @@ queryEvent.watch(function(err,result){
 text = fs.readFileSync('./contracts/myClientContract4.json','utf8');
 var myContractInterface = JSON.parse(text);
 var myContract = web3.eth.contract(myContractInterface.abi).new({from:web3.eth.accounts[0],gas:3000000,data:myContractInterface.unlinked_binary});
-
-/*
-var filter = web3.eth.filter('latest');
-// watch for changes
-filter.watch(function(error, result){
-    if (!error)
-      console.log(result);
-  });
-*/
