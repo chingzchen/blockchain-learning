@@ -2,6 +2,8 @@
 
 完整的oracle contract架構如下：
 
+![](media/21260768a717b351777f8758b5f8e64d.png)
+
 -   myClientContract”繼承”OracleApp合約
 
 -   OracleResolver合約保存實際Oracle合約(OracleContract)的位址
@@ -15,7 +17,7 @@
 ----
 
 所有的source
-code都在Github上：*https://github.com/michael-chi/blockchain-learning/tree/master/oracle*
+code都在Github上：<https://github.com/michael-chi/blockchain-learning/tree/master/oracle>
 
 -   建立OracleContract.sol
 
