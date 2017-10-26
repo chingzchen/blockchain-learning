@@ -1,15 +1,15 @@
 pragma solidity ^0.4.10;
 
-contract OracleResolver {
+contract OracleResolver4 {
     address owner;
     address public oracleAddress;
 
-    function OracleResolver () {
+    function OracleResolver4() {
         owner = msg.sender;
     }
 
     modifier onwerOnly {
-        require(msg.sender != owner);
+        require(msg.sender == owner);
         _;
     }
 
