@@ -1,0 +1,114 @@
+<!doctype>
+<html>
+
+<head>
+<script type="text/javascript" src="./dist/web3.js"></script>
+<script type="text/javascript" src="./build/buildercert.js"></script>
+<script type="text/javascript" src="./build/classcert.js"></script>
+<script type="text/javascript">
+
+    var Web3 = require('web3');
+    var web3 = new Web3();
+    web3.setProvider(new web3.providers.HttpProvider("http://<TX_URL>:8545"));
+    var myContract = null;
+
+    function createContract() {
+        // hide create button
+        document.getElementById('create').style.visibility = 'hidden'; 
+        document.getElementById('code').innerText = code;
+
+        // let's assume that coinbase is our account
+        web3.eth.defaultAccount = web3.eth.coinbase;
+        web3.personal.unlockAccount(web3.eth.accounts[0],'<PASSWORD>');
+        // create contract
+        document.getElementById('status').innerText = "transaction sent, waiting for confirmation";
+        web3.eth.contract(ABI.abi).new({from:web3.eth.accounts[0], gas:3000000, data: ABI.bytecode}, function (err, contract) {
+            if (err) {
+                alert(err);
+                return;
+            // callback fires twice, we only want the second call when the contract is deployed
+            } else if(contract.address){
+                myContract = contract;
+                alert('address: ' + myContract.address);
+
+                document.getElementById('status').innerText = 'Mined!';
+                document.getElementById('call').style.visibility = 'visible';
+            }
+        });
+    }
+    function callExampleContract() {
+        var today = (new Date());
+        var opt = {from:web3.eth.accounts[0], gas:3000000};
+        var expiry = (new Date( today.getFullYear() + 1, today.getMonth(), today.getDate() ));
+        myContract.UpdateInformation.sendTransaction('Name of the Ship',1,1,'Owner Name 2','Owner Address', 'Designation' ,'POA' ,today.getTime(),expiry.getTime(),'Shipyard address', opt,
+                function (err, result) {
+                    if (err) {
+                        alert('Err'+err);
+                        return;
+                    }
+                    txhash = result;
+                    filter = web3.eth.filter('latest');
+                    filter.watch(function (error, result) {
+                        var receipt = web3.eth.getTransactionReceipt(txhash);
+                
+                        if (receipt && receipt.transactionHash == txhash) {
+                            //console.log(receipt);
+                            //console.log('get customer Balance:' + transaction.getBalance.call(customer));
+                            
+                            filter.stopWatching();
+                            //alert('contract.ShipownerName=' +　myContract.ShipownerName.call());
+                            /*
+                                console.log('NameOfShip=' + myContract.NameOfShip.call());
+                                console.log('ShipownerName=' + myContract.ShipownerName.call());
+                                console.log('ShopownerAddress=' + myContract.ShopownerAddress.call());
+                                console.log('ShipyardAddress=' + myContract.ShipyardAddress.call());
+                                console.log('IMO=' + myContract.IMO.call());
+                                var issueDate = new Date(parseFloat(myContract.DateOfExpiry.call().toString()) );
+                                console.log('Issue date=' +issueDate);
+                                var expireDate = new Date(parseFloat(myContract.DateOfExpiry.call().toString()) );
+                                console.log('Expiry date=' +expireDate);
+                            */
+                            var issueDate = new Date(parseFloat(myContract.DateOfExpiry.call().toString()) );
+                            var expireDate = new Date(parseFloat(myContract.DateOfExpiry.call().toString()) );
+                            document.getElementById('output').innerHTML = 'NameOfShip:' + myContract.NameOfShip.call()
+                                                                        + '<div/>' + 
+                                                                        'ShipownerName:' + myContract.ShipownerName.call()
+                                                                        + '<div/>' + 
+                                                                        'ShopownerAddress:' + myContract.ShopownerAddress.call()
+                                                                        + '<div/>' + 
+                                                                        'ShipyardAddress:' +  myContract.ShipyardAddress.call()
+                                                                        + '<div/>' + 
+                                                                        'IMO:' + myContract.IMO.call()
+                                                                        + '<div/>' +
+                                                                        'Expiry:' + expireDate
+                                                                        + '<div/>' +
+                                                                        'Issue:' + issueDate;
+                            alert('done');
+                        }
+                    });
+                });
+                document.getElementById('output').innerText = 'sending transaction...';
+    }
+
+</script>
+</head>
+<body>
+    <h1>contract</h1>
+    <div id="code"></div> 
+    <div id="status"></div>
+    <div id='create'>
+        <button type="button" onClick="createContract();">create example contract</button>
+    </div>
+    <div id='call' style='visibility: hidden;'>
+        
+        <div>
+            <input type="button" onclick='callExampleContract()' value='call smart contract'></input>
+        </div>
+        <div>
+            <div id="output"></div>
+        </div>
+    </div>
+    <div id="result"></div>
+</body>
+</html>
+

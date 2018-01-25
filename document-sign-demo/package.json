@@ -1,0 +1,10 @@
+{
+  "name": "mpa-hackfest",
+  "namespace": "mpa-hackfest",
+  "version": "0.20.4",
+  "description": "DEMO for MPA Blockchain hackfest",
+  "dependencies": {
+    "web3": "^0.20.0"
+  },
+  "license": "LGPL-3.0"
+}
