@@ -1,10 +1,5 @@
 var mnemonic = '';
-process.argv.forEach(function (val, index, array) {
-    console.log(index + ': ' + val);
-    if(index == 2){
-        mnemonic = val;
-    }
-});
+mnemonic = process.argv[2];
 console.log('mnemonic:' + mnemonic);
 // Import libraries we need.
 var txnUrl = 'http://ethyrf-dns-reg1.eastasia.cloudapp.azure.com:8545';

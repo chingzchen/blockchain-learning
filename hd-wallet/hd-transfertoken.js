@@ -1,16 +1,10 @@
 var from = '';
 var mnemonic = '';
 var to = '';
-process.argv.forEach(function (val, index, array) {
-    console.log(index + ': ' + val);
-    if(index == 2){
-        from = val;
-    }else if(index == 3){
-        mnemonic = val;
-    }else if(index ==4){
-        to = val;
-    }
-});
+
+from = process.argv[2];
+mnemonic = process.argv[3];
+to = process.argv[4];
 console.log('from:'+ from);
 console.log('mnemonic:'+mnemonic);
 console.log('to:'+ to);
