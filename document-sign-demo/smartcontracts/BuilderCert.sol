@@ -76,6 +76,17 @@ contract BuilderCert {
         string NameOfSignatory;
         string DesignationOfSignatory;
 	*/
+	function GetPOA () public returns (string ,string, uint){
+                /*
+                struct PowerOfAttorney {
+                        uint DateOfPOA;
+                        string NameOfSignatory;
+                        string DesignationOfSignatory;
+                }
+                */
+                return (POA.NameOfSignatory, POA.DesignationOfSignatory, POA.DateOfPOA);
+	}
+	
 	function Sign(string nameOfSignatory, string designationOfSignatory) public returns (bool) {
 		/*require(
 			!stringsEqual(nameOfSignatory,"") &&
