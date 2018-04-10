@@ -96,3 +96,10 @@ Check Token Balance
 node hd-checkTokenBalance \<account address\> \<mnemonic\>
 ```
 ![](media/de07c7bdb65d6073d26a86094e8b50ea.png)
+
+References
+==========
+- ethereumjs-wallet: https://github.com/ethereumjs/ethereumjs-wallet
+- eth-hd-wallet: https://github.com/meth-project/eth-hd-wallet
+- hd-wallet-provider: https://github.com/trufflesuite/truffle-hdwallet-provider
+
