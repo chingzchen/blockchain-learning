@@ -51,6 +51,10 @@ vessel.NewBuilderCert.sendTransaction(IMO, opt,
                 //BuilderCert created
                 var builderAddress = vessel.GetBuildCert.call(IMO);
                 console.log('builder address:' + builderAddress);
+                if( web3._extend.utils.toDecimal(builderAddress) == 0){
+                    //class cert has not been created yet
+                    return;
+                }                
                 //Update BuilderCert Info
                 var abi = LoadCertABI('./build/BuilderCert.json');
                 var builder = LoadContract(web3, abi.abi, builderAddress);

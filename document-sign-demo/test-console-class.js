@@ -50,6 +50,10 @@ vessel.NewClassCert.sendTransaction(IMO, opt,
                 filter.stopWatching();
                 //BuilderCert created
                 var classCertAddress = vessel.GetClassCert.call(IMO);
+                if( web3._extend.utils.toDecimal(classCertAddress) == 0){
+                    //class cert has not been created yet
+                    return;
+                }                
                 console.log('class cert address:' + classCertAddress);
 
                 //Update BuilderCert Info
