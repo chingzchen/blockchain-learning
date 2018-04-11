@@ -2,9 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var UTILS = require('./utils.js');
 var util = new UTILS();
-const port = 9000;
+const port = 8000;
 var app = express();
-
 // === Express Body parser ===
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
