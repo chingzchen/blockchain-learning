@@ -4,6 +4,14 @@ Overview
 This document introduces how to create a Docker image that runs Web3.JS web
 application and deploy to Azure Web App (Linux)
 
+Table of Content
+========
+[Create Docker Image](#create-docker-image)
+
+[Create Linux Web App Service Plan](#create-linux-web-app-service-plan)
+
+[Enable Logging](#enable-logging)
+
 Reference
 =========
 
