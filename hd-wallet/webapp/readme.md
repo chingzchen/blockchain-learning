@@ -128,3 +128,14 @@ az webapp config appsettings set --resource-group
 
 -   And it works!
 ![](media/e5ede9c77413b31aca859b6184ae6c03.png)
+
+Enable Logging
+=================================
+-   Execute below command in cloud shell to enable all loggings, details of each parameter can be found [here](https://docs.microsoft.com/en-us/cli/azure/webapp/log?view=azure-cli-latest)
+```
+az webapp log config --name <WEB APP NAME> --resource-group <RESOURCE GROUP NAME> --application-logging true --detailed-error-messages true --docker-container-logging filesystem --failed-request-tracing true --level verbose --web-server-logging filesystem
+```
+For example,
+```
+az webapp log config --name michi-linux-web3app --resource-group michi-ethereum-consortium-rg --application-logging true --detailed-error-messages true --docker-container-logging filesystem --failed-request-tracing true --level verbose --web-server-logging filesystem
+```
