@@ -100,8 +100,8 @@ az webapp create --resource-group \<RESOURCE GROUP NAME\> --plan \<YOUR PLAN
 For example,
 ```
 az webapp create --resource-group michi-ethereum-consortium-rg --plan
->   michi-linuxappservice-plan --name michi-linux-web3app
->   --deployment-container-image-name kalschi/linuxwebapp:0.5
+   michi-linuxappservice-plan --name michi-linux-web3app
+   --deployment-container-image-name kalschi/linuxwebapp:0.5
 ```
 ![](media/9b248b90bee7182db0b5175e3ef65877.png)
 
@@ -118,8 +118,8 @@ az webapp config appsettings set --resource-group \<RESOURCE GROUP NAME\>
 For example,
 ```
 az webapp config appsettings set --resource-group
->   michi-ethereum-consortium-rg --name michi-linux-web3app --settings
->   WEBSITES_PORT=8000
+   michi-ethereum-consortium-rg --name michi-linux-web3app --settings
+   WEBSITES_PORT=8000
 ```
 ![](media/2d545c5aaa093394efa25c05601fc016.png)
 
