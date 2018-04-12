@@ -16,6 +16,7 @@ module.exports = function() {
         utils.metaCoin.methods.sendCoin(to, 1).send({from:utils.hdProvider.address,gas:3000000})
                 .on('error', function(err){
                     console.log('error:' + err);
+                    res.send({"result":"error","error":err});
                 })
                 .on('transactionHash', function(hash){
                     console.log('hash:' + hash);
