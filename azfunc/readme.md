@@ -177,4 +177,4 @@ inside&to=0xa0c4a2728fefe8759c25fa9cb02793f50404dd56&token=2
 
 Known Issue
 ===========
-- Function App can only accept Http Get
+- This demo can only accept Http Get
