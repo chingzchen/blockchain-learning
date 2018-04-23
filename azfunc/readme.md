@@ -12,6 +12,12 @@ Reference
 
 -   <https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function-azure-cli-linux>
 
+Why is this important
+=====================
+At this moment, most samples on the internet are only to create a very simple hello-world Function App.
+In this lab I demonstrate how to create anode.js  Linux container based Azure Function App with 3rd party dependencies - which provide required steps to allow you to create useful Function App.
+
+
 Create Docker Image
 ===================
 
