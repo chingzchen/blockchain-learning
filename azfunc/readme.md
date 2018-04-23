@@ -174,3 +174,7 @@ field custom game label unique bread average breeze view
 inside&to=0xa0c4a2728fefe8759c25fa9cb02793f50404dd56&token=2
 ```
 ![](media/bf34635da8ef47876381450c0b1b3e7d.png)
+
+Known Issue
+===========
+- Function App can only accept Http Get
