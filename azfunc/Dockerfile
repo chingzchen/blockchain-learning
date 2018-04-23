@@ -6,9 +6,6 @@ ENV AzureWebJobsScriptRoot=/home/site/wwwroot
 COPY . /home/site/wwwroot 
 
 
-
-
-
 # update
 RUN apt-get update \
         && apt-get install -y --no-install-recommends dialog \
@@ -28,7 +25,5 @@ RUN apt-get update \
 
 # Node.Js dependencies
 RUN mkdir -p /home/site/wwwroot/HttpFunction/node_modules
-#RUN npm install --prefix /home/site/wwwroot/HttpFunction
-#npm install ./HttpFunction --prefix ../test
 RUN npm install /home/site/wwwroot/HttpFunction --prefix /home/site/wwwroot/HttpFunction
      
