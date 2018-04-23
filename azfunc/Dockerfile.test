@@ -1,0 +1,95 @@
+#Reference:
+#https://blogs.msdn.microsoft.com/appserviceteam/2017/11/15/functions-on-linux-preview/
+#FROM node:9.11-stretch as runtime_env
+FROM microsoft/azure-functions-runtime:2.0.0-jessie as runtime_env
+# application
+#RUN mkdir /code
+#WORKDIR /code
+#ADD . /code/
+
+# ssh
+#ENV SSH_PASSWD "root:Docker!"
+#RUN apt-get update \
+#        && apt-get install -y --no-install-recommends dialog \
+#        && apt-get update \
+#    && apt-get install -y --no-install-recommends openssh-server \
+#    && echo "$SSH_PASSWD" | chpasswd 
+#RUN apt-get install -y git
+#COPY ./docker/sshd_config /etc/ssh/
+
+# update
+RUN apt-get update \
+        && apt-get install -y --no-install-recommends dialog \
+        && apt-get update
+RUN apt-get install -y git        
+# build-essential & python
+RUN apt-get install -y build-essential
+RUN apt-get install -y python
+RUN apt-get install -y curl
+
+# Azure Function Core Tools
+#RUN npm i -g azure-functions-core-tools@core --unsafe-perm true
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+RUN apt-get update
+RUN apt-get install azure-functions-core-tools
+
+# .Netcore 2.0
+#FROM microsoft/dotnet:2.0-runtime-deps
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install .NET Core
+#ENV DOTNET_VERSION 2.0.6
+#ENV DOTNET_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Runtime/$DOTNET_VERSION/dotnet-runtime-$DOTNET_VERSION-linux-x64.tar.gz
+#ENV DOTNET_DOWNLOAD_SHA b8a00bbac9b0f4f9cf03785afa2aa71e6e5d24c1035ad9865e14c259eb06b3d98a524c1f2bb1567810a556a5c2380252642b7b43d919982c89962707e5361383
+#RUN curl -SL $DOTNET_DOWNLOAD_URL --output dotnet.tar.gz \
+#    && echo "$DOTNET_DOWNLOAD_SHA dotnet.tar.gz" | sha512sum -c - \
+#    && mkdir -p /usr/share/dotnet \
+#    && tar -zxf dotnet.tar.gz -C /usr/share/dotnet \
+#    && rm dotnet.tar.gz \
+#    && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet   
+
+# node.js modules
+#WORKDIR /HttpFunction
+# === For testing ===
+#RUN npm install body-parser
+#RUN npm install eth-hd-wallet
+#RUN npm install ethereumjs-wallet
+#RUN npm install express
+#RUN npm install truffle-contract
+#RUN npm install truffle-hdwallet-provider
+#RUN npm install web3
+#=====================
+#RUN npm install
+
+
+#FROM runtime_env
+# Launch application
+#RUN func init . --docker --sample
+
+#FROM microsoft/azure-functions-runtime:v2.0.0-beta1
+ENV AzureWebJobsScriptRoot=/home/site/wwwroot
+COPY . /home/site/wwwroot
+
+# node.js modules
+WORKDIR /home/site/wwwroot/HttpFunction
+# === For testing ===
+#RUN npm install body-parser
+#RUN npm install eth-hd-wallet
+#RUN npm install ethereumjs-wallet
+#RUN npm install express
+#RUN npm install truffle-contract
+#RUN npm install truffle-hdwallet-provider
+#RUN npm install web3
+RUN npm install
+#WORKDIR /home/site/wwwroot
+
+# Expose TCP ports
+# EXPOSE 7071 6666
+#ENTRYPOINT [ "bash" ]
+#CMD ["bash", "func", "start"]
