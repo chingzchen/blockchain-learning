@@ -56,6 +56,7 @@ Deploy POA Network
     [this](https://www.ssh.com/ssh/putty/windows/puttygen) instruction or
     [this](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
     to create one.
+    You may also want to enable "Public RPC" as well.
 
 ![](media/9de79e9ecd37974d4b1e49817cd2e77b.png)
 
