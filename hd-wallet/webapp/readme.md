@@ -50,11 +50,11 @@ Create Docker Image
     docker image
 
 ```
-sudo docker build –tag \<YOUR DOCKER ID\>/linuxwebapp:0.5 .
+sudo docker build –t \<YOUR DOCKER ID\>/linuxwebapp:0.5 .
 ```
 For example, below’s my command
 ```
-sudo docker build –tag kalschi/linuxwebapp:0.5 .
+sudo docker build –t kalschi/linuxwebapp:0.5 .
 ```
 -   Once completed, run “sudo docker images” to check newly created image exists
 
